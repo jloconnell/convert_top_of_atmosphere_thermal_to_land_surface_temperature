@@ -10,6 +10,7 @@ Alber, M., & O’Connell, J. L. (2019). Elevation drives gradients in surface so
 **Step 2**: Preprocess the landsat 8 data with the script XXX, which loads the data, filters to high quality cloud-free pixels and cacluates standard landsat 8 spectral indices (NDVI, etc)
 
 **Step 3**: Uset the atmosphereic correction parameter retrival script to automate interaction with Julia Barsi's NASA web tool. This script is available at https://github.com/jloconnell/remote_sensing_with_R/blob/master/atmospheric_correction_landsat_suface_temp.r 
+
 For more about Barsi's webtool see: 
 
 Barsi, J. A., Barker, J. L., & Schott, J. R. (2003). An Atmospheric Correction Parameter Calculator for a single thermal band earth-sensing instrument. In IGARSS 2003. 2003 IEEE International Geoscience and Remote Sensing Symposium. Proceedings (IEEE Cat. No.03CH37477) (Vol. 5, pp. 3014–3016 vol.5). https://doi.org/10.1109/IGARSS.2003.1294665
