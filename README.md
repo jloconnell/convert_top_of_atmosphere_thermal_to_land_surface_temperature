@@ -1,12 +1,11 @@
 # Convert Landsat 8 top of atmosphere thermal band data to land surface temperature
-Methods to retrieve atmospheric correction parameters from Barsi et al.'s (2003, 2005) NASA webtool and calculate land surface temperature from top of atmosphere Landsat 8 thermal band data. Currently, one should only use Landsat 8's band 10 for thermal data, because noise from stray light reduces the utility of Landsat 8's band 11 (see Cook et al. 2014).
-
-Cook, M., Schott, J. R., Mandel, J., & Raqueno, N. (2014). Development of an operational calibration methodology for the Landsat thermal data archive and initial testing of the atmospheric compensation component of a Land Surface Temperature (LST) product from the archive. Remote Sensing, 6(11), 11244–11266. https://doi.org/10.3390/rs61111244
-
-
-For more information, see our paper:
+These are scripts that calculate land surface temperature, as we did in our paper:
 
 Alber, M., & O’Connell, J. L. (2019). Elevation drives gradients in surface soil temperature within salt marshes. Geophysical Research Letters, In Review.
+
+These methods retrieve atmospheric correction parameters from Barsi et al.'s (2003, 2005) NASA webtool and calculate land surface temperature from top of atmosphere Landsat 8 thermal band data. Currently, one should only use Landsat 8's band 10 for thermal data, because noise from stray light reduces the utility of Landsat 8's band 11 (see Cook et al. 2014).
+
+Cook, M., Schott, J. R., Mandel, J., & Raqueno, N. (2014). Development of an operational calibration methodology for the Landsat thermal data archive and initial testing of the atmospheric compensation component of a Land Surface Temperature (LST) product from the archive. Remote Sensing, 6(11), 11244–11266. https://doi.org/10.3390/rs61111244
 
 **Step 1**: download Landsat 8 surface reflectance data, which also includes top of atmosphere brightness temperature bands 10 and 11,  for points of interest, from Google Earth Engine with the script available at https://github.com/jloconnell/Google_Earth_Engine/blob/master/landsat8_to_points.js
 
