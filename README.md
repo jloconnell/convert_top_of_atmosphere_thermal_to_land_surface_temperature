@@ -1,5 +1,5 @@
 # Convert Landsat 8 top of atmosphere thermal band data to land surface temperature
-Methods for retrieving atmospheric correction parameters from Barsi et al.'s (2003,2005) NASA webtool and calculate land surface temperature from top of atmosphere Landsat 8 thermal band data
+Methods for retrieving atmospheric correction parameters from Barsi et al.'s (2003, 2005) NASA webtool and calculate land surface temperature from top of atmosphere Landsat 8 thermal band data
 
 For more information, see our paper:
 
