@@ -18,4 +18,4 @@ Barsi, J. A., Schott, J. R., Palluconi, F. D., & Hook, S. J. (2005). Validation 
 
 **Step 4**: Merge the landsat data with the atmospheric parameters retrieved in step 3. Then apply the function for calculating land surface temperature available at 
 
-This function requires NDVI, an estimate of land cover based on NDVI, and an estimate of emissivity based on land cover. Emissivity for land cover types can be calculated either from ground-truth data, or by averaging emissivity information for the land cover type from ASTER's band 13 (the closest wavelength to Landsat 8's band 10). 
+This function requires NDVI, an estimate of land cover based on NDVI cut-offs, and an estimate of emissivity for each land cover type. Emissivity for land cover types can be calculated either from ground-truth data, or by averaging emissivity information for the land cover type from ASTER's band 13 (the closest wavelength to Landsat 8's band 10). ASTER emissivity data are also freely available on Google Earth Engine.
