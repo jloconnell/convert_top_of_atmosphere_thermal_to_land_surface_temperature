@@ -1,6 +1,6 @@
 # convert Landsat 8 top of atmosphere thermal band data to land surface temperature
-Functions for retrieving atmospheric correction parameters from Barsi et al 's NASA webtool 
-and calculating land surface temperature from Landsat thermal bands
+Methods for retrieving atmospheric correction parameters from Barsi et al 's NASA webtool 
+and calculating land surface temperature from top of atmosphere Landsat 8 thermal band data
 
 Step 1: download Landsat 8 surface reflectance data, which also includes top of atmosphere brightness temperature bands 10 and 11,  for points of interest, from Google Earth Engine with the script available at https://github.com/jloconnell/Google_Earth_Engine/blob/master/landsat8_to_points.js
 
