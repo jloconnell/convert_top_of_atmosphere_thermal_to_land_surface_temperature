@@ -15,7 +15,9 @@ https://github.com/jloconnell/convert_top_of_atmosphere_thermal_to_land_surface_
 
 This script loads the data, filters to high quality cloud-free pixels and creates date and location fields from standard Google Earth Engine output
 
-**Step 3**: Cacluates standard landsat 8 spectral indices (NDVI, etc)
+**Step 3**: Cacluate standard landsat 8 spectral indices (NDVI, etc). If desired, use the function available at: 
+
+https://github.com/jloconnell/remote_sensing_with_R/blob/master/landsat8_vegetation_indices.r
 
 **Step 4**: Uset the atmosphereic correction parameter retrival script to automate interaction with Julia Barsi's NASA web tool. This script is available at https://github.com/jloconnell/remote_sensing_with_R/blob/master/atmospheric_correction_landsat_suface_temp.r 
 
