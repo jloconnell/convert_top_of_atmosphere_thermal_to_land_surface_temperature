@@ -14,9 +14,10 @@ calc_lst<- function(lsat, water.cut=0.05, soil.cut=0.15,  veg.cut=0.45, water.em
   ##and: Yu et al. (2014). Land surface temperature retrieval from Landsat 8 TIRS—Comparison between 
   ##        radiative transfer equation-based method, split window algorithm and single channel method. 
   ##        Remote Sensing, 6(10), 9829–9852. https://doi.org/10.3390/rs6109829
-  ## note that these papers suggest 0.5 as for veg.cut (e.g., ndvi>0.5 is vegetation) 
+  ## note that these papers suggest 0.5 for veg.cut (e.g., ndvi>0.5 is vegetation) 
   ##   and 0.2 for soil.cut in upland habitats; In wetlands, spectral reflectance is dampened by watery backgrounds. 
-  ##   The default cut offs in the function defintion were the ones we observed at our salt marsh site on Sapelo Island
+  ##   The default cut offs and associated emissivities in the function defintion were the ones we observed 
+  ##   at our salt marsh site on Sapelo Island
   
   ##proportion of vegetation, which can be used to weight the emmissivity calc of mixed soil and vegetation pixels
   pv<- ((lsat$ndvi-soil.cut)/(veg.cut-soil.cut))^2
