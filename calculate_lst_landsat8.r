@@ -1,23 +1,35 @@
 ##calculate Land Surface Temperature from band 10 for landsat 8
-##assumes the following columns exist in the dataframe passed to the function:
+##assumes the following columns exist in the dataframe passed to the function and that ndvi was created from surface reflectance:
 ##       ndvi, b10, trans, Iu, Id (the last three are from Barsi's web-tool)
 ##assumes that the following land covers are of interest: water, soil, vegetation
 ##water.cut, soil.cut, and veg.cut are the NDVI cut-offs that separate these land cover classes
 ##water.em, soil.em and veg.em are the estimated land cover emissivities for the area of interest.
 ## emissivity can be estimated with ground-truth data or from ASTER (https://lpdaac.usgs.gov/products/ag100v003/)
 ## ASTER data are also availabe in Google Earth Engine with the image id "NASA/ASTER_GED/AG100_003"
-calc_lst<- function(lsat, water.cut=0.05, soil.cut=0.15,  veg.cut=0.4, water.em= 0.991, soil.em=0.969, veg.em=0.98){
+calc_lst<- function(lsat, water.cut=0.05, soil.cut=0.15,  veg.cut=0.4, water.em= 0.991, soil.em=0.969, veg.em=0.976){
   
-  ##what is the maximum NDVI value observed? This is assumed as the maximum vegetation value
-  veg.max<-max(lsat$ndvi)
+  ####calculate the proportion of vegetation in the pixel:  ####
+  ##see Avdan, U., & Jovanovska, G. (2016). Algorithm for automated mapping of land surface temperature 
+  ##        using LANDSAT 8 satellite data. Journal of Sensors, 2016, 1–8. https://doi.org/10.1155/2016/1480307
+  ##and: Yu et al. (2014). Land surface temperature retrieval from Landsat 8 TIRS—Comparison between 
+  ##        radiative transfer equation-based method, split window algorithm and single channel method. 
+  ##        Remote Sensing, 6(10), 9829–9852. https://doi.org/10.3390/rs6109829
+  ## note that these papers suggest 0.5 as for veg.cut (e.g., ndvi>0.5 is vegetation) 
+  ##   and 0.2 for soil.cut in upland habitats; In wetlands, spectral reflectance is dampened by watery backgrounds. 
+  ##   The default cut offs in the function defintion were the ones we observed at our salt marsh site on Sapelo Island
+
   ##proportion of vegetation, which can be used to weight the emmissivity calc of mixed soil and vegetation pixels
-  ##here we're using the max and min NDVI's on non-water pixels (eg, min soil and max vegetation NDVI's)
-  pv<- ((lsat$ndvi-water.cut)/(veg.max-0))^2
+  pv<- ((lsat$ndvi-soil.cut)/(veg.cut-soil.cut))^2
+  ##clean up pv, to represent a ratio from 0 to 1
+  ##this recoding just says that, if pv as indicated by ndvi is greater than my veg cut-off, 
+  ##I know this pixel is 100% vegetation, similarly, if it's below my soil cut-off, I know this 100% soil
+  pv<-ifelse(pv>1, 1, pv)
+  pv<-ifelse(pv<0, 0, pv)
   
   ##start building a data frame that can hold our calculations
   out<-data.frame(pv=pv)
   
-  ##assign emissivities based on land cover type
+  ##assign emissivities based on land cover type (assumed from ndvi and the cover type ndvi cut offs )
   ##begin by assigning all pixels the emissivity of water in aster band 13
   out$em<- water.em
   ##now selectively change the emissivity of pixels that are not water, again with info from ASTER
