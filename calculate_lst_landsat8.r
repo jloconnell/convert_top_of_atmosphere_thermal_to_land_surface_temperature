@@ -6,7 +6,7 @@
 ##water.em, soil.em and veg.em are the estimated land cover emissivities for the area of interest.
 ## emissivity can be estimated with ground-truth data or from ASTER (https://lpdaac.usgs.gov/products/ag100v003/)
 ## ASTER data are also availabe in Google Earth Engine with the image id "NASA/ASTER_GED/AG100_003"
-calc_lst<- function(lsat, water.cut=0.05, soil.cut=0.15,  veg.cut=0.4, water.em= 0.991, soil.em=0.969, veg.em=0.976){
+calc_lst<- function(lsat, water.cut=0.05, soil.cut=0.15,  veg.cut=0.45, water.em= 0.991, soil.em=0.969, veg.em=0.98){
   
   ####calculate the proportion of vegetation in the pixel:  ####
   ##see Avdan, U., & Jovanovska, G. (2016). Algorithm for automated mapping of land surface temperature 
@@ -17,7 +17,7 @@ calc_lst<- function(lsat, water.cut=0.05, soil.cut=0.15,  veg.cut=0.4, water.em=
   ## note that these papers suggest 0.5 as for veg.cut (e.g., ndvi>0.5 is vegetation) 
   ##   and 0.2 for soil.cut in upland habitats; In wetlands, spectral reflectance is dampened by watery backgrounds. 
   ##   The default cut offs in the function defintion were the ones we observed at our salt marsh site on Sapelo Island
-
+  
   ##proportion of vegetation, which can be used to weight the emmissivity calc of mixed soil and vegetation pixels
   pv<- ((lsat$ndvi-soil.cut)/(veg.cut-soil.cut))^2
   ##clean up pv, to represent a ratio from 0 to 1
@@ -36,14 +36,14 @@ calc_lst<- function(lsat, water.cut=0.05, soil.cut=0.15,  veg.cut=0.4, water.em=
   ##here the emissivity to assign is based on land cover type, which is decided by NDVI cut-offs (eg, land covers have different NDVI)
   ## emiss of pure veg, in aster product+constant for surface roughness
   out$emiss<-ifelse(lsat$ndvi>=veg.cut, veg.em+0.005, out$emiss) 
-  ## emiss of marsh soil in aster was 0.969
+  ## emiss of marsh soil in aster
   out$emiss<-ifelse(lsat$ndvi<=soil.cut&lsat$ndvi>= water.cut, soil.em, out$emiss)
   ##for mixed soil and vegetation pixels, weight the emissivity by the proportion of each (pv is proportion vegetation)
   out$emiss<-ifelse(lsat$ndvi<veg.cut&lsat$ndvi> soil.cut, soil.em*(1-out$pv)+veg.em*out$pv+0.005, out$emiss) 
   
   
   ##Calculate Land Surface Temperature from:
-  ##emissivity, top of atmosphere band 10 radiance, and atmospheric correction parameters
+  ##  emissivity, top of atmosphere band 10 radiance, and atmospheric correction parameters
   
   ##all the constants we need
   ##for equation from Yu et al. 2014 Remote Sensing 6: 9829–52.
