@@ -31,7 +31,7 @@ calc_lst<- function(lsat, water.cut=0.05, soil.cut=0.15,  veg.cut=0.4, water.em=
   
   ##assign emissivities based on land cover type (assumed from ndvi and the cover type ndvi cut offs )
   ##begin by assigning all pixels the emissivity of water in aster band 13
-  out$em<- water.em
+  out$emiss<- water.em
   ##now selectively change the emissivity of pixels that are not water, again with info from ASTER
   ##here the emissivity to assign is based on land cover type, which is decided by NDVI cut-offs (eg, land covers have different NDVI)
   ## emiss of pure veg, in aster product+constant for surface roughness
