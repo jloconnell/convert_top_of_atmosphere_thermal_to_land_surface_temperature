@@ -6,9 +6,13 @@
 ##water.em, soil.em and veg.em are the estimated land cover emissivities for the area of interest.
 ## emissivity can be estimated with ground-truth data or from ASTER (https://lpdaac.usgs.gov/products/ag100v003/)
 ## ASTER data are also availabe in Google Earth Engine with the image id "NASA/ASTER_GED/AG100_003"
-calc_lst<- function(lsat, water.cut=0.05, soil.cut=0.15, veg.cut=0.4, water.em= 0.991, soil.em=0.969, veg.em=0.98){
+calc_lst<- function(lsat, water.cut=0.05, soil.cut=0.15,  veg.cut=0.4, water.em= 0.991, soil.em=0.969, veg.em=0.98){
+  
+  ##what is the maximum NDVI value observed? This is assumed as the maximum vegetation value
+  veg.max<-max(lsat$ndvi)
   ##proportion of vegetation, which can be used to weight the emmissivity calc of mixed soil and vegetation pixels
-  pv<- ((lsat$ndvi-soil.cut)/(veg.cut-0))^2
+  ##here we're using the max and min NDVI's on non-water pixels (eg, min soil and max vegetation NDVI's)
+  pv<- ((lsat$ndvi-water.cut)/(veg.max-0))^2
   
   ##start building a data frame that can hold our calculations
   out<-data.frame(pv=pv)
