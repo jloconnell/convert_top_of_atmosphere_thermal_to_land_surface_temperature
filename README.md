@@ -1,9 +1,12 @@
 # Convert Landsat 8 top of atmosphere thermal band data to land surface temperature
 These are scripts that calculate land surface temperature, as we did in our paper:
 
-Alber, M., & O’Connell, J. L. (2019). Elevation drives gradients in surface soil temperature within salt marshes. Geophysical Research Letters, In Review.
+Alber M, O’Connell JL. 2019. Elevation drives gradients in surface soil temperature within salt marshes. Geophysical Research Letters 46:5313–22.
 
-These methods retrieve atmospheric correction parameters from Barsi et al.'s (2003, 2005) NASA webtool and calculate land surface temperature from top of atmosphere Landsat 8 thermal band data. Currently, one should only use Landsat 8's band 10 for thermal data, because noise from stray light reduces the utility of Landsat 8's band 11 (see Cook et al. 2014).
+You can use these scripts to map spatiotemporal variation in land surface temperture as shown below for tidal marsh areas on Sapelo Island, GA for high vs low tide conditions.
+<img src="/img/surface_temp_flooded_vs_dry+landsat8.jpeg" alt="Landsurface temperature" width="700"/>
+
+These methods begin by retrieving atmospheric correction parameters from Barsi et al.'s (2003, 2005) NASA webtool and calculating land surface temperature from top of atmosphere Landsat 8 thermal band data. Currently, one should only use Landsat 8's band 10 for thermal data, because noise from stray light reduces the utility of Landsat 8's band 11 (see Cook et al. 2014).
 
 Cook, M., Schott, J. R., Mandel, J., & Raqueno, N. (2014). Development of an operational calibration methodology for the Landsat thermal data archive and initial testing of the atmospheric compensation component of a Land Surface Temperature (LST) product from the archive. Remote Sensing, 6(11), 11244–11266. https://doi.org/10.3390/rs61111244
 
